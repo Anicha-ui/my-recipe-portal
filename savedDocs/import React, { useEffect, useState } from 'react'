@@ -1,0 +1,50 @@
+import React, { useEffect, useState } from 'react';
+
+const RecipeFromRapid = () => {
+  const [recipes, setRecipes] = useState([]);
+  const url = 'https://tasty.p.rapidapi.com/recipes/list?from=0&size=3&tags=under_30_minutes';
+  const options = {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-key': 'b9771e9473mshbcd1bfd562090d2p18a320jsn7a37d3506da9',
+      'x-rapidapi-host': 'tasty.p.rapidapi.com'
+    }
+  };
+
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log(result);
+        // Ensure `recipes` is always an array, even if not present in the API response
+        setRecipes(result.results || []); // Default to empty array if `recipes` is undefined
+      } catch (error) {
+        console.error('Error fetching recipes:', error);
+      }
+    };
+
+    fetchRecipes(); // Call the async function
+  }, []); // Empty dependency array means this runs once when the component mounts
+
+  return (
+    <div>
+      <h1>Recipes</h1>
+      {/* Check if recipes array exists and contains items before calling map */}
+      <section className="meals">
+        {recipes && recipes.length > 0 ? (
+          recipes.map((meal) => {
+            return <li key={meal.id}>{meal.name}</li>;
+          })
+        ) : (
+          <p>No recipes available</p>
+        )}
+      </section>
+    </div>
+  );
+};
+
+export default RecipeFromRapid;

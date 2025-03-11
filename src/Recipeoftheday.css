@@ -1,0 +1,374 @@
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  /* Container for the whole app */
+  .App {
+    background-color: #f4f4f9;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Main title of the app */
+  .App h1 {
+    font-size: 1.5rem;
+    _color: #3c3a3a;
+    color:#fff;
+    margin-bottom: 20px;
+  }
+  
+  /* Heading for each section (vegetarian, non-vegetarian, dessert) */
+  h2 {
+    font-size: 2rem;
+    color: #bcbfaa;
+    _margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  /* Recipe title styles */
+  h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 10px 0;
+    text-transform: uppercase;
+  }
+
+  .txtSmall {
+    font-size: 0.8rem;
+    color: #333;
+    margin: 10px 0;
+  }
+
+  a {
+    text-decoration: none;
+    background-color: #fff;
+    color: #28292a;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .title{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    color: #3c3a3a;
+    margin: 10px 0;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .topBarTitle{
+    color: #555353;
+    font-size: 1.6rem;
+    font-family: Georgia, Times, 'Times New Roman', serif;
+  }
+
+  .description{
+    font-size: 1rem;
+    _font-family: Georgia, Times, 'Times New Roman', serif;
+    color: #3c3a3a;
+    margin: 10px 0;
+  }
+
+  /* Styling the recipe images */
+ 
+
+  /* Instructions section style */
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 10px auto;
+    text-align: left;
+  }
+  
+  /* Loading spinner or message */
+  .loading {
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 50px;
+    font-weight: bold;
+  }
+  
+  /* Recipe container (for each recipe section) */
+  .recipe-container {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    max-width: 800px;
+    transition: all 0.3s ease;
+  }
+  
+  .recipe-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  
+  .recipe-top-containers{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:40px;
+  }
+  
+  /* button overlapping the image style */
+  .image-container {
+    position: relative;
+    width: 100%;
+    gap:15px;
+  }
+
+  /* Image styling */
+  .image-container img {
+    width: 100%;
+    height: auto;
+    _height:50vh;
+    display: block;
+  }
+
+  
+  
+  /* Button styling */
+  .image-container .button {
+    position: absolute;
+    bottom: -25px; /* Position from the bottom of the image */
+    left:5%;
+    padding: 15px 20px;
+    background-color: rgb(76, 74, 53,0.9);
+    color: white;
+    border: none;
+    font-size: 1.15rem;
+    font-weight: 500;
+    cursor: pointer;
+    width:90%
+  }
+
+  .image-container .button:hover {
+    background-color: rgb(76, 74, 53,0.9);
+  }
+
+  .moreSaveBtns{
+    border: 1px solid #989a98;
+    padding:5px;
+    font-size: 0.8rem;
+  }
+  
+  ul {
+    padding-left: 20px; /* Add padding to space bullets from the text */
+  }
+  
+  li {
+    margin-bottom: 10px; /* Add space between list items */
+  }
+
+  .home-link:link{
+    background: none;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .contentContainer{    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px auto;
+    text-align: left;
+    font-family: Georgia, Times, 'Times New Roman', serif;
+  }
+
+  .noBorderButton{
+    border: none;
+    background-color: transparent;
+    width: fit-content;
+    padding: 0rem;
+    text-decoration: none;
+  }
+  .allButtons{
+    background-color: #5f5e4a;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color:#fff;
+    border:0;
+  }
+
+  .search-container {
+    position: relative;
+    display: inline-block; 
+  }
+  
+  .search-input {
+    padding-left: 30px; /* Adjust as needed */
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    height: 40px;
+    padding: 11px 20px;
+    width: 15vw;
+    border: 1px solid #eaeaea;
+    box-shadow: none;
+    outline: none;
+    appearance: none;
+    background-color: rgb(247, 247, 247);
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .search-input::placeholder {
+    font-style: italic;
+  }
+  
+  .search-container::before {
+    content: "\f002"; /* Unicode for Font Awesome search icon */
+    font-family: FontAwesome;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-style: normal;
+    color:#989a98;
+    font-weight:500;
+  }
+  
+  .horizontal-categories {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.category-item {
+    padding: 5px 20px;
+    margin: 5px;
+    /* border: 1px solid #ddd;
+    border-radius: 5px; */
+    cursor: pointer;
+    position: relative; /* Required for absolute positioning of tags */
+}
+
+.category-item h6 {
+    margin: 0;
+}
+
+.tags-on-hover {
+    position:absolute;
+    top: 100%; /* Position below the category */
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    z-index: 1; /* Ensure tags appear above other content */
+    display: flex;
+}
+
+.tag {
+    padding: 5px;
+    margin: 2px;
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    font-size: 0.8em;
+    display: flex;
+    text-wrap: nowrap;
+    width:100%;
+}
+
+.logoImage{
+  width:5%;
+  position: absolute;
+}
+
+/* for hamburger menu on mobile*/
+.menu-item-trigger{
+  display:none;
+}
+/* .menu-item-category{display:none;} */
+
+  /* Media Queries for Responsive Design */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2, h3 {
+      font-size: 1.5rem;
+    }
+  
+    img {
+      max-width: 90%;
+    }
+  
+    .recipe-container {
+      padding: 15px;
+    }
+  
+    p {
+      font-size: 0.95rem;
+    }
+    .recipe-top-containers{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap:40px;
+      }
+      .search-input {
+        width:80vw;
+      }
+      .search-container::before {
+        left:20px;
+      }
+
+      .menu-item-category{
+        display: none;
+      } 
+      .menu-item-trigger{
+        display:block;
+        text-align: center;
+      }
+      .menu-item-category.is-open{
+        display: block;
+        transition: right 0.5s ease-in-out; 
+      } 
+      .search-container::before {
+        left: 50px;
+      }
+      .horizontal-categories {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 20px;
+        border:1px solid #eaeaea;
+        -webkit-box-shadow: 0 4px 6px -6px #222;
+        -moz-box-shadow: 0 4px 6px -6px #222;
+        box-shadow: 0 4px 6px -6px #222;
+    }
+    .tags-on-hover {
+      position:relative;
+    }
+    .tag {
+      text-wrap: wrap;
+      flex: 1 1 30%; /*grow | shrink | basis */
+    }
+    .logoImage{
+      width:20%;
+      position: absolute;
+    }
+    
+  }
+  

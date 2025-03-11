@@ -1,0 +1,9 @@
+# Enable rewriting
+RewriteEngine On
+
+# Serve index.html for all routes
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]

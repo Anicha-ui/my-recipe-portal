@@ -1,0 +1,211 @@
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  /* Container for the whole app */
+  .App {
+    background-color: #f4f4f9;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Main title of the app */
+  .App h1 {
+    font-size: 1.5rem;
+    _color: #3c3a3a;
+    color:#fff;
+    margin-bottom: 20px;
+  }
+  
+  /* Heading for each section (vegetarian, non-vegetarian, dessert) */
+  h2 {
+    font-size: 2rem;
+    color: #bcbfaa;
+    _margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  /* Recipe title styles */
+  h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 10px 0;
+    text-transform: uppercase;
+  }
+  
+  a {
+    text-decoration: none;
+    background-color: #fff;
+    color: #28292a;
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .title{
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    color: #3c3a3a;
+    margin: 10px 0;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .description{
+    font-size: 1rem;
+    _font-family: Georgia, Times, 'Times New Roman', serif;
+    color: #3c3a3a;
+    margin: 10px 0;
+  }
+
+  /* Styling the recipe images */
+ 
+  img { 
+    width: 300px; 
+    height: 500px; 
+    object-fit:contain; 
+    position: relative; 
+    _top: 50%; 
+    _transform: translateY(-50%); 
+}
+.imgContainer{
+  gap:15px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+}
+  /* Instructions section style */
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    margin: 10px auto;
+    text-align: left;
+  }
+  
+  /* Loading spinner or message */
+  .loading {
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 50px;
+    font-weight: bold;
+  }
+  
+  /* Recipe container (for each recipe section) */
+  .recipe-container {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    _box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    transition: all 0.3s ease;
+  }
+  
+  .recipe-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Adding styles for the buttons (optional if you want to add functionality) */
+  button {
+    background-color: #fff;
+    color: var(--color-dark);
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+  }
+  
+  
+  .recipe-top-containers{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:40px;
+  }
+  
+  /* button overlapping the image style */
+  .image-container {
+    position: relative;
+    width: 100%;
+    gap:15px;
+    display: grid;
+  }
+
+  /* Image styling */
+  .image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  
+  /* Button styling */
+  .image-container .button {
+    position: absolute;
+    bottom: -25px; /* Position from the bottom of the image */
+    left:5%;
+    padding: 15px 20px;
+    background-color: rgb(76, 74, 53,0.9);
+    color: white;
+    border: none;
+    font-size: 1.15rem;
+    font-weight: 500;
+    cursor: pointer;
+    width:90%
+  }
+
+  .image-container .button:hover {
+    background-color: rgb(76, 74, 53,0.9);
+  }
+
+  .moreSaveBtns{
+    border: 1px solid #989a98;
+    padding:5px;
+    font-size: 0.8rem;
+  }
+  
+  /* Media Queries for Responsive Design */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2, h3 {
+      font-size: 1.5rem;
+    }
+  
+    img {
+      max-width: 90%;
+    }
+  
+    .recipe-container {
+      padding: 15px;
+    }
+  
+    p {
+      font-size: 0.95rem;
+    }
+    .recipe-top-containers{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap:40px;
+      }
+  }
+  

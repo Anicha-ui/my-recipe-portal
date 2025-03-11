@@ -1,0 +1,127 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/fonts/proximanova/proximanova_regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+  /* Colours */
+  --color-text-white: #fff;
+  --color-primary: #28292a;
+  --color-dark: #4c4a35;
+  --color-bg: #5f5e4a;
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f3f3f3;
+}
+
+.App {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+section {
+  margin: 2rem 8rem 1rem 8rem;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+input {
+  text-align: center;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.nutrients ul {
+  display: flex;
+  width: 35rem;
+  justify-content: space-evenly;
+}
+
+.meals {
+  display: flex;
+}
+
+img {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  margin: 0 1rem;
+  max-width: 300px;
+  box-shadow: 0 4px 8px 2px rgba(77, 77, 77, 0.15);
+}
+
+ul {
+  list-style: none;
+}
+
+.instructions {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+a {
+  text-decoration: none;
+  background-color: #fff;
+  color: #28292a;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1024px) {
+  .meals {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nutrients ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  section {
+    margin: 2rem 1rem 1rem 1rem;
+  }
+}
+
