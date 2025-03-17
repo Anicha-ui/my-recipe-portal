@@ -94,7 +94,7 @@ const RecipeDetailsFromAPICall = () => {
         </Link>
       </div>
     <section className="meals mt-5">
-        <div className="container">
+        <div className="container mt-5">
         <h3 className="title mt-5">{recipe.name}</h3>
         <h4 className="description">{recipe.description}</h4>
         <div className="row">

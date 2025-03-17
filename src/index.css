@@ -74,7 +74,7 @@ h1 {
 
 img {
   width: 100%;
-  margin-bottom: 1rem;
+  _margin-bottom: 1rem;
 }
 
 article {
@@ -100,7 +100,7 @@ a {
   background-color: #fff;
   color: #28292a;
   width: fit-content;
-  padding: 0.5rem 1rem;
+  _padding: 0.5rem 1rem;
   text-decoration: none;
 }
 

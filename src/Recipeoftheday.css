@@ -49,7 +49,7 @@
     background-color: #fff;
     color: #28292a;
     width: fit-content;
-    padding: 0.5rem 1rem;
+    _padding: 0.5rem 1rem;
     text-decoration: none;
   }
   
@@ -59,11 +59,22 @@
   }
 
   .title{
-    font-family: Georgia, Times, 'Times New Roman', serif;
+    _font-family: Georgia, Times, 'Times New Roman', serif;
     color: #3c3a3a;
     margin: 10px 0;
     text-transform: uppercase;
     text-decoration: none;
+  }
+
+  .recipeTitle{
+    _font-family: Georgia, Times, 'Times New Roman', serif;
+    color: #3c3a3a;
+    text-decoration: none;
+  }
+
+  .recipeTitleHeight{
+    height:50px;
+    display:block;
   }
 
   .topBarTitle{
@@ -136,15 +147,42 @@
 
   /* Image styling */
   .image-container img {
-    width: 100%;
-    height: auto;
-    _height:50vh;
+    _width: 100%;
+    _height: auto;
+    object-fit: cover; 
     display: block;
   }
 
-  
+  .side-border{
+    border-left: 1px solid #d9d7c8;
+    border-right: 1px solid #d9d7c8;
+    border-top: 1px solid #d9d7c8;
+  }
   
   /* Button styling */
+  .image-container .infoTop {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    left:5%;
+    padding: 7px 20px;
+    background-color: rgb(76, 74, 53,0.9);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    width:100%;
+  }
+
+  .image-container .info {
+    left:5%;
+    padding: 15px 20px;
+    _background-color: rgb(76, 74, 53,0.9);
+    color: rgb(76, 74, 53,0.9);
+    border: 1px solid #d9d7c8;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    width:100%;
+  }
+
   .image-container .button {
     position: absolute;
     bottom: -25px; /* Position from the bottom of the image */
@@ -166,7 +204,7 @@
   .moreSaveBtns{
     border: 1px solid #989a98;
     padding:5px;
-    font-size: 0.8rem;
+    font-size: 0.55rem;
   }
   
   ul {
@@ -211,9 +249,14 @@
     border:0;
   }
 
+  .searchBox{
+    padding-top:110px
+  }
+
   .search-container {
     position: relative;
     display: inline-block; 
+    padding-top:55px;
   }
   
   .search-input {
@@ -221,13 +264,13 @@
     font-family: Georgia, Times, 'Times New Roman', serif;
     height: 40px;
     padding: 11px 20px;
-    width: 15vw;
+    width: 14vw;
     border: 1px solid #eaeaea;
     box-shadow: none;
     outline: none;
     appearance: none;
     background-color: rgb(247, 247, 247);
-    border-radius: 20px;
+    border-radius: 4px;
     font-size: 0.9rem;
   }
   
@@ -239,12 +282,12 @@
     content: "\f002"; /* Unicode for Font Awesome search icon */
     font-family: FontAwesome;
     position: absolute;
-    left: 20px;
-    top: 50%;
+    left: 10px;
+    top: 79%;
     transform: translateY(-50%);
     font-style: normal;
     color:#989a98;
-    font-weight:500;
+    font-weight:400;
   }
   
   .horizontal-categories {
@@ -254,13 +297,25 @@
     margin-top: 20px;
 }
 
+.vertical-categories {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 .category-item {
-    padding: 5px 20px;
-    margin: 5px;
-    /* border: 1px solid #ddd;
+    padding: 5px 0px;
+    /* margin: 5px;
+    border: 1px solid #ddd;
     border-radius: 5px; */
     cursor: pointer;
     position: relative; /* Required for absolute positioning of tags */
+    border-bottom:1px solid #eaeaea;
+}
+
+.category-title{
+  font-size: 0.9rem;
 }
 
 .category-item h6 {
@@ -268,15 +323,16 @@
 }
 
 .tags-on-hover {
-    position:absolute;
+    _position:absolute;
     top: 100%; /* Position below the category */
-    left: 0;
+    left: 30px;
     background-color: rgba(255, 255, 255, 0.9);
     padding: 5px;
-    border: 1px solid #ddd;
+    _border: 1px solid #ddd;
     border-radius: 5px;
     z-index: 1; /* Ensure tags appear above other content */
     display: flex;
+    flex-direction: column;
 }
 
 .tag {
@@ -288,6 +344,7 @@
     display: flex;
     text-wrap: nowrap;
     width:100%;
+    
 }
 
 .logoImage{
@@ -298,6 +355,39 @@
 /* for hamburger menu on mobile*/
 .menu-item-trigger{
   display:none;
+} 
+
+.hide-on-desktop {
+  display: none;
+}
+
+/* Styling for Chips */
+.selected-tags {
+  display: flex;
+  flex-direction:row;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.tag-chip {
+  background-color: rgb(161, 143, 122);
+  color:#fff;
+  padding: 4px 8px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+}
+
+.remove-tag {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 /* .menu-item-category{display:none;} */
 
@@ -328,6 +418,10 @@
         justify-content: space-between;
         gap:40px;
       }
+    
+      .searchBox {
+        padding-top: 30px;
+    }
       .search-input {
         width:80vw;
       }
@@ -370,5 +464,6 @@
       position: absolute;
     }
     
+ 
   }
   
