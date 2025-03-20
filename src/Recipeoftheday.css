@@ -391,6 +391,59 @@
 }
 /* .menu-item-category{display:none;} */
 
+/* style for Latest Recipe */
+
+.first-recipe-description{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color:#d9d7c8;
+  padding:20px;
+  align-items: center; /* Horizontally center the items */
+}
+
+.first-recipe-description-text1{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1.6rem;
+  background-color:#d9d7c8;
+}
+
+.first-recipe-description-text2{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.second-recipe-description{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1.4rem;
+  padding:10px;
+  background-color: #5f5e4a;
+  top:-54px;
+  color:white;
+  position: relative;
+  white-space: nowrap;            /* Prevent the text from wrapping */
+  overflow: hidden;               /* Hide the overflowing text */
+  text-overflow: ellipsis; 
+}
+.tip{
+  padding:10px;
+  _background-color:#2d4558;
+  background-color: #a18f7a;
+  color:#fff;
+}
+.tipBtn{
+  color:#fff;
+  border:none;
+  background-color:#a18f7a;
+  font-size:0.8rem;
+}
+.tipBtn::after{
+  content: "\2192";
+}
+.viewLatest:after{
+  content: "\2192";
+}
+
+/* style for Latest Recipe */
   /* Media Queries for Responsive Design */
   @media (max-width: 768px) {
     h1 {

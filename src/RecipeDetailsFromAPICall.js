@@ -30,8 +30,6 @@ const RecipeDetailsFromAPICall = () => {
   };
 
   useEffect(() => {
-    console.log('Fetching recipe details for ID:', id);
-  
     const fetchRecipeDetails = async () => {
       try {
         const url = `https://tasty.p.rapidapi.com/recipes/get-more-info?id=${id}`;
@@ -49,8 +47,6 @@ const RecipeDetailsFromAPICall = () => {
         console.log('API Response:', data); // Log the full API response
   
         if (result.ok) {
-          // Log the structure of the response to ensure it's what we expect
-          console.log('Response Structure:', data);
   
           // Assuming the response is directly a recipe, not inside an array
           const selectedRecipe = data.results ? data.results[0] : data;
@@ -93,8 +89,10 @@ const RecipeDetailsFromAPICall = () => {
           <h2 style={{paddingLeft:'95px', marginBottom:'0'}} className="topBarTitle">Blue Leaf Recipes</h2>
         </Link>
       </div>
+      
     <section className="meals mt-5">
         <div className="container mt-5">
+        <div style={{paddinTop:'400px', position:'absolute'}}><Link to="/" className="home-link moreSaveBtns" >Home</Link></div>
         <h3 className="title mt-5">{recipe.name}</h3>
         <h4 className="description">{recipe.description}</h4>
         <div className="row">

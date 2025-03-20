@@ -6,6 +6,8 @@ import ImageLogo  from './assets/blueLeaf_logo03.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons'; // Import the solid heart
 import { AnimatePresence, motion } from "framer-motion";
+import LatestRecipes from "./LatestRecipes";
+import TipofTheDay from './TipofTheDay';
 
 const RecipeFromAPICall = () => {
   //const [favorites, setFavorites] = useState([]);
@@ -18,12 +20,14 @@ const RecipeFromAPICall = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Track if it's mobile
-
+  const [error, setError] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [openCategories, setOpenCategories] = useState({});
   const [selectedChips, setSelectedChips] = useState([]);
+  const [selectedRecipeId, setSelectedRecipeId] = useState(null); // To track the selected recipe
+  const [tips, setTips] = useState([]); // To store tips for the selected recipe
   
 
   const [Myrecipes, setMyRecipes] = useState({
@@ -33,7 +37,7 @@ const RecipeFromAPICall = () => {
             dessert: null,
         });
 
-    const [error, setError] = useState("");
+    
 
     const API_URL = "https://tasty.p.rapidapi.com/recipes/list";
     const API_KEY = "b9771e9473mshbcd1bfd562090d2p18a320jsn7a37d3506da9";
@@ -44,33 +48,34 @@ const RecipeFromAPICall = () => {
     //fetching recipes by category while first entering the page
     const fetchRecipeByCategory = async (category) => {
         try {
-            const response = await fetch(`${API_URL}?from=0&size=60&tags=${category}`, {
-                method: "GET",
-                headers: {
-                    "x-rapidapi-key": API_KEY,
-                    "x-rapidapi-host": API_HOST,
-                },
-            });
+              const response = await fetch(`${API_URL}?from=0&size=80&tags=${category}`, {
+                  method: "GET",
+                  headers: {
+                      "x-rapidapi-key": API_KEY,
+                      "x-rapidapi-host": API_HOST,
+                  },
+              });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+              if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+              }
 
-            const result = await response.json();
-            if (result.results.length > 0) {
-                return result.results[Math.floor(Math.random() * result.results.length)];
-            } else {
-                return null;
-            }
-        } catch (error) {
-            console.error(`Error fetching ${category} recipe:`, error);
-            setError(error.message);
-            return null;
-        }
-    };
+              const result = await response.json();
+              if (result.results.length > 0) {
+                  return result.results[Math.floor(Math.random() * result.results.length)];
+              } else {
+                  return null;
+              }
+          } catch (error) {
+              console.error(`Error fetching ${category} recipe:`, error);
+              setError(error.message);
+              return null;
+          }
+      };
 
     const fetchDailyRecipes = async () => {
         const newRecipes = {};
+
         for (let category of Mycategories) {
             newRecipes[category] = await fetchRecipeByCategory(category);
         }
@@ -84,6 +89,8 @@ const RecipeFromAPICall = () => {
     useEffect(() => {
         const lastFetchDate = localStorage.getItem("lastFetchDate");
         const savedRecipes = localStorage.getItem("dailyRecipes");
+
+        console.log(`my recipes ${savedRecipes}`)
 
         if (lastFetchDate === new Date().toDateString() && savedRecipes) {
             setMyRecipes(JSON.parse(savedRecipes));
@@ -105,7 +112,7 @@ const RecipeFromAPICall = () => {
     setError(null);
     try {
         const response = await fetch(
-          `${API_URL}?from=0&size=10&q=${encodeURIComponent(query)}`,
+          `${API_URL}?from=0&size=80&q=${encodeURIComponent(query)}`,
           {
             method: "GET",
             headers: {
@@ -116,17 +123,18 @@ const RecipeFromAPICall = () => {
         );
 
         if (!response.ok) {
-          throw new Error("Failed to fetch recipes");
+          throw new Error("No Recipes Found For Your Search...");
         }
 
-        const data = await response.json();
-        setRecipes(data.results || []);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+          const data = await response.json();
+          setRecipes(data.results || []);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
     };
+
     const handleSearchChange = (e) => {
       const newQuery = e.target.value;
       setSearchQuery(newQuery);
@@ -198,6 +206,8 @@ const RecipeFromAPICall = () => {
       // Remove selected tag manually (with the "X" button)
       const removeTag = (tag) => {
         setSelectedTags(prevTags => prevTags.filter(t => t !== tag));
+        setError();
+        fetchDailyRecipes();
       };
 
     const categories = {
@@ -216,6 +226,7 @@ const RecipeFromAPICall = () => {
   const fetchRecipesByTags = async () => {
       if (selectedTags.length === 0) {
           setFilteredRecipes([]); // Reset if no tags are selected
+          setError();
           return;
       }
 
@@ -224,9 +235,7 @@ const RecipeFromAPICall = () => {
       // Join selected tags into a query string
       const tagsQuery = selectedTags.map(tag => tag.toLowerCase().replace(/\s+/g, "_")).join(",");
       console.log("Selected tags:", tagsQuery); // Debugging selected tags
-      const apiUrl = `${API_URL}?from=0&size=40&tags=${tagsQuery}`;
-
-      console.log("Fetching from API:", apiUrl); // Debugging API URL
+      const apiUrl = `${API_URL}?from=0&size=80&tags=${tagsQuery}`;
 
       try {
           const response = await fetch(apiUrl, {
@@ -246,10 +255,10 @@ const RecipeFromAPICall = () => {
               setFilteredRecipes(result.results);
           } else {
               setFilteredRecipes([]); // No results
-              console.log("No recipes found for selected tags.");
+              throw new Error('No Recipes Found For Your Options...');
           }
       } catch (error) {
-          console.error("Error fetching recipes by tags:", error);
+          console.log("hello" + error);
           setError(error.message);
       } finally {
           setLoading(false);
@@ -334,10 +343,10 @@ const RecipeFromAPICall = () => {
         //return data.results; // Assuming `results` contains the similar recipes
       } else {
         setError(data.message); // Handle error
-        console.error("Error fetching similar recipes:", data.message);
+        console.error("No Similar Recipes Found...");
       }
     } catch (error) {
-      console.error("Error fetching from API:", error);
+      console.error(error.message);
     }
   };
   
@@ -351,6 +360,12 @@ const RecipeFromAPICall = () => {
       </div>
       <section className="mt-4">
         <div className="row justify-content-center">
+          <div className="row">
+            <div  className="col-lg-2 col-sm-12"></div>
+            <div className="col-10 text-center" style={{height:'40px'}} >
+              {error && <div className="mt-5" style={{color:'red', fontSize:'1rem', paddingTop:'30px'}}> {error}</div>}
+            </div>
+          </div>
         {/* Search functionality */}
           <div className="col-sm-12 col-lg-2 mt-4 searchBox" >
             <div className="col-12 search-container text-center">
@@ -487,11 +502,11 @@ const RecipeFromAPICall = () => {
                 </section>
                 <div className="row">
                   {Mycategories.map((category) => (
-                    <div key={category} className="recipe col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                    <div key={category} className="recipe col-12 col-sm-6 col-md-4 col-lg-3 mb-2">
                       {Myrecipes[category] ? (
                         <div className="container">
                           <div className="row mt-lg-5 mt-sm-3">
-                            <div className="image-container mt-2 mb-5">
+                            <div className="image-container mt-2 mb-2">
                               <div className="infoTop recipeTitle text-center">{category.charAt(0).toUpperCase() + category.slice(1)}</div>
                               <Link to={`/recipe/${Myrecipes[category].id}`}>
                                 <img className="img-fluid side-border" src={Myrecipes[category].thumbnail_url} alt={Myrecipes[category].name} />
@@ -514,9 +529,7 @@ const RecipeFromAPICall = () => {
                                     </div>
                                   </div>
                               </div>
-                              
                             </div>
-                            
                           </div>
                         </div>
                       ) : (
@@ -524,8 +537,9 @@ const RecipeFromAPICall = () => {
                       )}
                     </div>
                   ))}
-                  {error && <p>Error: {error}</p>}
+                  {/* {error && <p>Error: {error}</p>} */}
                 </div>
+                <div className="container mt-2"><LatestRecipes/></div>
               </div>
           )}
       
@@ -570,7 +584,7 @@ const RecipeFromAPICall = () => {
                 </div>
               </div>
             ) : (
-              !loading 
+              !loading
           )}
       
           {/* Only render filtered recipes by tags if they exist */}
@@ -580,7 +594,7 @@ const RecipeFromAPICall = () => {
                 <h2 className="title topSpacing">Recipes from Selected Options</h2>
               </section>
               {loading && <p>Loading recipes...</p>}
-              {error && <p className="error">{error}</p>}
+              {/* {error && <p className="error">{error}</p>} */}
               <div className="row">
                 {filteredRecipes.map((recipe) => (
                   <div key={recipe.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
@@ -626,7 +640,7 @@ const RecipeFromAPICall = () => {
                 <h2 className="title topSpacing">Similar Recipes</h2>
               </section>
               {loading && <p>Loading recipes...</p>}
-              {error && <p className="error">{error}</p>}
+              {/* {error && <p className="error">{error}</p>} */}
               <div className="row">
                 {similarRecipes.map((recipe) => (
                   <div key={recipe.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
@@ -659,7 +673,7 @@ const RecipeFromAPICall = () => {
               </div>
             </div>
           ) : (
-            !loading 
+            !loading
           )}
           </div>
         </div>
